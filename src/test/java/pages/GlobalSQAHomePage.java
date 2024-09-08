@@ -29,7 +29,7 @@ public class GlobalSQAHomePage extends BasePage {
     public void consentCookies() {
         try {
             if (consentButton.isDisplayed()) {
-                //elementMethods.waitForElementToBeClickable(consentButton);
+                elementMethods.waitForElementToBeVisible(consentButton);
                 LoggerUtility.info("'Consent' button is clickable.");
                 elementMethods.clickJSElement(consentButton);
                 LoggerUtility.info("Successfully clicked on the 'Consent' button.");

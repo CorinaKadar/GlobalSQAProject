@@ -19,6 +19,7 @@ public class SharedData {
     public void prepareEnv() {
         EdgeOptions options = new EdgeOptions();
         options.addArguments("--headless=new");
+        options.addArguments("--disable-popup-blocking");
         driver = new EdgeDriver(options);
         LoggerUtility.info("The browser is successfully opened.");
         driver.get("https://www.globalsqa.com/");
