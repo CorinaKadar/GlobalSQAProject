@@ -16,7 +16,7 @@ public class BankCustomerTest extends SharedData {
     public void testMethod() {
         ElementMethods elementMethods = new ElementMethods(getDriver());
         GlobalSQAHomePage globalSQAHomePage = new GlobalSQAHomePage(getDriver());
-        globalSQAHomePage.consentCookies();
+        globalSQAHomePage.consentCookiesIfVisible();
         globalSQAHomePage.hoverOverTestersHubMenu();
         globalSQAHomePage.hoverOverAngularJSPPSSubmenu();
         globalSQAHomePage.interactWithBankingProjectSubmenu();

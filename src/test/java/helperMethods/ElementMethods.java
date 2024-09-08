@@ -41,12 +41,6 @@ public class ElementMethods {
         element.click();
     }
 
-    public void clickJSElement(WebElement element){
-        waitForElementToBeClickable(element);
-        JavascriptExecutor jsClick = (JavascriptExecutor) driver;
-        jsClick.executeScript("arguments[0].click();", element);
-    }
-
     public void hoverOverElement(WebElement element) {
         waitForElementToBeVisible(element);
         Actions actions = new Actions(driver);

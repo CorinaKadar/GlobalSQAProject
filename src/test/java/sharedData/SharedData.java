@@ -19,12 +19,8 @@ public class SharedData {
     public void prepareEnv() {
         EdgeOptions options = new EdgeOptions();
         options.addArguments("--headless=new");
-        //options.addArguments("--disable-popup-blocking");
-        //options.addArguments("--disable-gpu");
-        //options.addArguments("--window-size=1920,1080");
         driver = new EdgeDriver(options);
         LoggerUtility.info("The browser is successfully opened.");
-        driver.manage().deleteAllCookies();
         driver.get("https://www.globalsqa.com/");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));

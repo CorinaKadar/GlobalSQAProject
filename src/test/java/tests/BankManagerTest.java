@@ -10,7 +10,7 @@ public class BankManagerTest extends SharedData {
     @Test
     public void testMethod() {
         GlobalSQAHomePage globalSQAHomePage = new GlobalSQAHomePage(getDriver());
-        globalSQAHomePage.consentCookies();
+        globalSQAHomePage.consentCookiesIfVisible();
         globalSQAHomePage.hoverOverTestersHubMenu();
         globalSQAHomePage.hoverOverAngularJSPPSSubmenu();
         globalSQAHomePage.interactWithBankingProjectSubmenu();

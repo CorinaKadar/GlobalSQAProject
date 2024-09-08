@@ -27,7 +27,7 @@ public class GlobalSQAHomePage extends BasePage {
     @FindBy(xpath = "//a[span[contains(text(), 'Registration Form')]]")
     private WebElement registrationFormSubmenu;
 
-    public void consentCookies() {
+    public void consentCookiesIfVisible() {
         WebElement consentButtonOptional = null;
         try {
             consentButtonOptional = elementMethods.waitForCookieToBeVisible(consentButton);
