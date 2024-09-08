@@ -31,7 +31,7 @@ public class ElementMethods {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public WebElement waitForCookie(WebElement element) {
+    public WebElement waitForCookieToBeVisible(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }

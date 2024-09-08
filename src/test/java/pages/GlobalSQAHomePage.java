@@ -30,7 +30,7 @@ public class GlobalSQAHomePage extends BasePage {
     public void consentCookies() {
         WebElement consentButtonOptional = null;
         try {
-            consentButtonOptional = elementMethods.waitForCookie(consentButton);
+            consentButtonOptional = elementMethods.waitForCookieToBeVisible(consentButton);
         } catch (TimeoutException e) {
             LoggerUtility.info("No 'Consent' button was shown on the page.");
         }
@@ -38,7 +38,7 @@ public class GlobalSQAHomePage extends BasePage {
             if (consentButtonOptional != null && consentButtonOptional.isDisplayed()) {
                 LoggerUtility.info("'Consent' button is visible.");
                 elementMethods.waitForElementToBeClickable(consentButtonOptional);
-                elementMethods.clickJSElement(consentButtonOptional);
+                elementMethods.clickElement(consentButtonOptional);
                 LoggerUtility.info("Successfully clicked on the 'Consent' button.");
             }
         } catch (Exception e) {
