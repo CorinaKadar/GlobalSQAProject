@@ -28,10 +28,12 @@ public class GlobalSQAHomePage extends BasePage {
 
     public void consentCookies() {
         try {
-            elementMethods.waitForElementToBeClickable(consentButton);
-            LoggerUtility.info("'Consent' button is clickable.");
-            elementMethods.clickElement(consentButton);
-            LoggerUtility.info("Successfully clicked on the 'Consent' button.");
+            if (consentButton.isDisplayed()) {
+                elementMethods.waitForElementToBeClickable(consentButton);
+                LoggerUtility.info("'Consent' button is clickable.");
+                elementMethods.clickElement(consentButton);
+                LoggerUtility.info("Successfully clicked on the 'Consent' button.");
+            }
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while consenting to cookies: " + e.getMessage());
             throw e;
