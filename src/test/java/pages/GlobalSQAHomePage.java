@@ -1,6 +1,7 @@
 package pages;
 
 import loggerUtility.LoggerUtility;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,11 +28,17 @@ public class GlobalSQAHomePage extends BasePage {
     private WebElement registrationFormSubmenu;
 
     public void consentCookies() {
+        WebElement consentButtonOptional = null;
         try {
-            if (consentButton.isDisplayed()) {
-                //elementMethods.waitForElementToBeVisible(consentButton);
-                LoggerUtility.info("'Consent' button is clickable.");
-                elementMethods.clickJSElement(consentButton);
+            consentButtonOptional = elementMethods.waitForCookie(consentButton);
+        } catch (TimeoutException e) {
+            LoggerUtility.info("No 'Consent' button was shown on the page.");
+        }
+        try {
+            if (consentButtonOptional != null && consentButtonOptional.isDisplayed()) {
+                LoggerUtility.info("'Consent' button is visible.");
+                elementMethods.waitForElementToBeClickable(consentButtonOptional);
+                elementMethods.clickJSElement(consentButtonOptional);
                 LoggerUtility.info("Successfully clicked on the 'Consent' button.");
             }
         } catch (Exception e) {
