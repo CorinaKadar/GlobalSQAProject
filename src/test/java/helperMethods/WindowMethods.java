@@ -7,10 +7,6 @@ import org.openqa.selenium.WebDriver;
 public class WindowMethods {
     public WebDriver driver;
 
-    public void closeCurrentBrowser(){
-        driver.quit();
-    }
-
     public void refreshPage(){
         driver.navigate().refresh();
     }

@@ -1,7 +1,6 @@
 package helperMethods;
 
 import lombok.AllArgsConstructor;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -76,7 +75,7 @@ public class ElementMethods {
     }
 
     // Method to avoid parsing, because Expected Data cannot be parsed due to the format used for filtering
-    // If you don't want to use the parse() function but still need to convert a date string from the format "MM/dd/yyyy" to "MMM dd yyyy", you can manually manipulate the string by splitting it, then reconstructing it using the Calendar class
+    // Converts a date string from the format "MM/dd/yyyy" to "MMM dd, yyyy"
     public String formatExpectedTransactionDate(String inputDate) {
         // Split the input date string into parts (month, day, year)
         String[] dateParts = inputDate.split("/");
