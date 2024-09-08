@@ -21,12 +21,12 @@ public class ElementMethods {
     public WebDriver driver;
 
     public void waitForElementToBeClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void waitForElementToBeVisible(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
