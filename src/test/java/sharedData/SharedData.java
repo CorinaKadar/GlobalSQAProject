@@ -20,6 +20,7 @@ public class SharedData {
         EdgeOptions options = new EdgeOptions();
         options.addArguments("--headless=new");
         options.addArguments("--disable-popup-blocking");
+        options.addArguments("--auto-open-devtools-for-tabs");
         driver = new EdgeDriver(options);
         LoggerUtility.info("The browser is successfully opened.");
         driver.get("https://www.globalsqa.com/");
