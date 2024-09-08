@@ -31,7 +31,7 @@ public class GlobalSQAHomePage extends BasePage {
             if (consentButton.isDisplayed()) {
                 elementMethods.waitForElementToBeClickable(consentButton);
                 LoggerUtility.info("'Consent' button is clickable.");
-                elementMethods.clickElement(consentButton);
+                elementMethods.clickJSElement(consentButton);
                 LoggerUtility.info("Successfully clicked on the 'Consent' button.");
             }
         } catch (Exception e) {
