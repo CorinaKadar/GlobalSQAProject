@@ -11,7 +11,7 @@ public class GlobalSQAHomePage extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "//button[@aria-label='Consent']")
+    @FindBy(xpath = "//p[@class='fc-button-label' and contains(text(), 'Consent')]")
     private WebElement consentButton;
 
     @FindBy(xpath = "//a[@class='no_border' and contains(text(), 'Tester’s Hub')]")
@@ -29,7 +29,7 @@ public class GlobalSQAHomePage extends BasePage {
     public void consentCookies() {
         try {
             if (consentButton.isDisplayed()) {
-                elementMethods.waitForElementToBeVisible(consentButton);
+                //elementMethods.waitForElementToBeVisible(consentButton);
                 LoggerUtility.info("'Consent' button is clickable.");
                 elementMethods.clickJSElement(consentButton);
                 LoggerUtility.info("Successfully clicked on the 'Consent' button.");
