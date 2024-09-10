@@ -1,5 +1,6 @@
 package helperMethods;
 
+import loggerUtility.LoggerUtility;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -102,6 +103,7 @@ public class ElementMethods {
     // It can only be used for Actual Date because Expected Date cannot be parsed due to the format used for filtering
     // This method is intended to take an actual displayed date string (MMM dd, yyyy HH:mm:ss a) as String inputDate, parse it into a Date object (MMM dd, yyyy), and then format it back into a string in the same format: "MMM dd, yyyy" as a String in this format is needed.
     public String formatActualTransactionDate(String inputDate) {
+        LoggerUtility.info("Sunt aici formatActualTransactionDate");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         Date date = null;
         try {
