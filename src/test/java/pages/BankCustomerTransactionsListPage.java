@@ -62,6 +62,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
         // The method loops through each row of the TransactionsTableRowValues, which is a list of WebElement objects representing the rows of the Transactions table on the webpage.
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
         try {
+            LoggerUtility.info("size-ul listei:" + transactionsTableRowValues.size());
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
                 WebElement currentRow = transactionsTableRowValues.get(i);
                 // Extracts the individual cells (<td> elements) from the current row using findElements.
@@ -70,6 +71,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
                 String actualDateTime = cells.get(0).getText().trim();
                 String actualAmount = cells.get(1).getText().trim();
                 String actualTransactionType = cells.get(2).getText().trim();
+                LoggerUtility.info("Afisare data neformatata:" + actualDateTime);
                 String actualFormattedDate = elementMethods.formatActualTransactionDate(actualDateTime); // This formatting ensures that the date values are in a consistent format for accurate comparison.
                 LoggerUtility.info("Successfully extracted the Actual values from row " + (i + 1) + " - Date-Time: " + actualFormattedDate + ", Amount: " + actualAmount + ", Transaction Type: " + actualTransactionType);
 
