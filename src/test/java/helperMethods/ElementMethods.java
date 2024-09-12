@@ -38,7 +38,7 @@ public class ElementMethods {
     // For dinamic content loading (Ajax or Javascript)
     public void waitForAjaxToComplete() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(driver -> js.executeScript("return jQuery.active == 0").equals(true));
     }
 

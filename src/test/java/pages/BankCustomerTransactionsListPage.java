@@ -46,6 +46,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
             LoggerUtility.info("The date: " + formattedCurrentDate + " is successfully inserted into the 'Start Date' field.");
             elementMethods.pressElement(startDateElement, Keys.ENTER);
             LoggerUtility.info("Successfully pressed 'Enter' to submit the date.");
+            elementMethods.waitForAjaxToComplete();
             LoggerUtility.info("Successfully filtered the transactions by the date: " + formattedCurrentDate);
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while filtering transactions by the date: " + formattedCurrentDate + ". Error: " + e.getMessage());
@@ -72,7 +73,6 @@ public class BankCustomerTransactionsListPage extends BasePage {
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
         // The method loops through each row of the TransactionsTableRowValues, which is a list of WebElement objects representing the rows of the Transactions table on the webpage.
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
-        elementMethods.waitForTableValuesToBeVisible(transactionsTableRowValues);
         elementMethods.waitForAjaxToComplete();
         try {
             LoggerUtility.info("size-ul listei:" + transactionsTableRowValues.size());
