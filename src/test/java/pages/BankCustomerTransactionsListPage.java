@@ -61,6 +61,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
         // The method loops through each row of the TransactionsTableRowValues, which is a list of WebElement objects representing the rows of the Transactions table on the webpage.
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
+        elementMethods.waitForTableValuesToBeVisible(transactionsTableRowValues);
         try {
             LoggerUtility.info("size-ul listei:" + transactionsTableRowValues.size());
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
