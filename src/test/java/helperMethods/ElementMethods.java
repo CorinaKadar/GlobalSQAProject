@@ -1,6 +1,5 @@
 package helperMethods;
 
-import loggerUtility.LoggerUtility;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -29,13 +28,7 @@ public class ElementMethods {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitForTableValuesToBeVisible(List<WebElement> element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.visibilityOfAllElements(element));
-    }
-
     public List<WebElement> refreshTransactionTableRowValues(String xpath) {
-        LoggerUtility.info("***************************** value for path: " + xpath);
         return driver.findElements(By.xpath(xpath));
     }
 
@@ -69,13 +62,6 @@ public class ElementMethods {
             e.printStackTrace();
             return "Field not found: " + fieldName;
         }
-    }
-
-    // For dynamic content loading (Ajax or Javascript)
-    public void waitForAjaxToComplete() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(driver -> js.executeScript("return jQuery.active == 0").equals(true));
     }
 
     public WebElement waitForCookieToBeVisible(WebElement element) {
@@ -150,7 +136,6 @@ public class ElementMethods {
     // It can only be used for Actual Date because Expected Date cannot be parsed due to the format used for filtering
     // This method is intended to take an actual displayed date string (MMM dd, yyyy HH:mm:ss a) as String inputDate, parse it into a Date object (MMM dd, yyyy), and then format it back into a string in the same format: "MMM dd, yyyy" as a String in this format is needed.
     public String formatActualTransactionDate(String inputDate) {
-        LoggerUtility.info("Sunt aici formatActualTransactionDate");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
         Date date = null;
         try {

@@ -46,7 +46,6 @@ public class BankCustomerTransactionsListPage extends BasePage {
             LoggerUtility.info("The date: " + formattedCurrentDate + " is successfully inserted into the 'Start Date' field.");
             elementMethods.pressElement(startDateElement, Keys.ENTER);
             LoggerUtility.info("Successfully pressed 'Enter' to submit the date.");
-            //elementMethods.waitForAjaxToComplete();
             LoggerUtility.info("Successfully filtered the transactions by the date: " + formattedCurrentDate);
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while filtering transactions by the date: " + formattedCurrentDate + ". Error: " + e.getMessage());
@@ -72,13 +71,9 @@ public class BankCustomerTransactionsListPage extends BasePage {
     // This method takes a list of BankCustomerObject objects, which represent the expected values for each row in the Transactions table.
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
-        //elementMethods.waitForAjaxToComplete();
         String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
-        LoggerUtility.info("***************************** value for path: " + extractedXPath);
         transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
-        LoggerUtility.info("***************************** value for transaction: " + transactionsTableRowValues);
         try {
-            LoggerUtility.info("size-ul listei:" + transactionsTableRowValues.size());
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
                 String actualDateTime = columnDateTimeValues.get(i).getText().trim();
                 String actualAmount = columnAmountValues.get(i).getText().trim();
