@@ -97,7 +97,6 @@ public class BankManagerCustomersListPage extends BasePage {
                 Assert.assertEquals(expectedValues.getAccountNumber(), actualAccountNumber);
                 LoggerUtility.info("Customers table values are successfully validated.");
                 LoggerUtility.info("The validation process for the Customers table rows is completed.");
-                break; // Exit the loop once the correct row is found and validated
             }
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while validating the Customers table row: " + e.getMessage());

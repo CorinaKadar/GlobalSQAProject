@@ -29,7 +29,7 @@ public class ElementMethods {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitForTableValuesToBeVisible (List<WebElement> element) {
+    public void waitForTableValuesToBeVisible(List<WebElement> element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOfAllElements(element));
     }
@@ -38,15 +38,37 @@ public class ElementMethods {
         return driver.findElements(By.xpath(xpath));
     }
 
-    public List<WebElement> getTransactionTableRowsUsingJS() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        return (List<WebElement>) js.executeScript(
-                "return document.querySelectorAll('table.table.table-bordered.table-striped tbody tr');");
+    // Generalized method to get the value of the @FindBy annotation
+    public String getFindByAnnotationValue(Object pageClassInstance, String fieldName) {
+        try {
+            // Get the class of the page instance passed
+            Class<?> clazz = pageClassInstance.getClass();
+
+            // Get the field by its name
+            Field field = clazz.getDeclaredField(fieldName);
+
+            // Check if the field is annotated with @FindBy
+            if (field.isAnnotationPresent(FindBy.class)) {
+                FindBy findBy = field.getAnnotation(FindBy.class);
+
+                // Extract the value from the annotation based on the type of locator
+                if (!findBy.xpath().isEmpty()) {
+                    return findBy.xpath();
+                } else if (!findBy.css().isEmpty()) {
+                    return findBy.css();
+                } else if (!findBy.id().isEmpty()) {
+                    return findBy.id();
+                } else {
+                    return "No valid locator found in @FindBy annotation.";
+                }
+            } else {
+                return "No @FindBy annotation present on the field: " + fieldName;
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            return "Field not found: " + fieldName;
+        }
     }
-
-
-
-
 
     // For dynamic content loading (Ajax or Javascript)
     public void waitForAjaxToComplete() {
