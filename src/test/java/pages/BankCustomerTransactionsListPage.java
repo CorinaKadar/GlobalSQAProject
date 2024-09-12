@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -25,6 +26,16 @@ public class BankCustomerTransactionsListPage extends BasePage {
 
     @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr")
     private List<WebElement> transactionsTableRowValues;
+
+    @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr/td[1]")
+    private List<WebElement> columnDateTimeValues;
+
+    @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr/td[2]")
+    private List<WebElement> columnAmountValues;
+
+    @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr/td[3]")
+    private List<WebElement> columnTransactionTypeValues;
+
 
     public void filterTransactionsByDate(String formattedCurrentDate) {
         LoggerUtility.info("Starting to filter the transactions by date: " + formattedCurrentDate);
@@ -62,17 +73,14 @@ public class BankCustomerTransactionsListPage extends BasePage {
         // The method loops through each row of the TransactionsTableRowValues, which is a list of WebElement objects representing the rows of the Transactions table on the webpage.
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
         elementMethods.waitForTableValuesToBeVisible(transactionsTableRowValues);
+        elementMethods.waitForAjaxToComplete();
         try {
             LoggerUtility.info("size-ul listei:" + transactionsTableRowValues.size());
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
-                WebElement currentRow = transactionsTableRowValues.get(i);
-                // Extracts the individual cells (<td> elements) from the current row using findElements.
-                // It retrieves the text from each cell and trims any extra spaces: "actualDateTime" from the first cell (index 0), "actualAmount" from the second cell (index 1), "actualTransactionType" from the third cell (index 2)
-                List<WebElement> cells = currentRow.findElements(By.tagName("td"));
-                String actualDateTime = cells.get(0).getText().trim();
-                String actualAmount = cells.get(1).getText().trim();
-                String actualTransactionType = cells.get(2).getText().trim();
-                LoggerUtility.info("Afisare data neformatata:" + actualDateTime);
+                String actualDateTime = columnDateTimeValues.get(i).getText().trim();
+                String actualAmount = columnAmountValues.get(i).getText().trim();
+                String actualTransactionType = columnTransactionTypeValues.get(i).getText().trim();
+
                 String actualFormattedDate = elementMethods.formatActualTransactionDate(actualDateTime); // This formatting ensures that the date values are in a consistent format for accurate comparison.
                 LoggerUtility.info("Successfully extracted the Actual values from row " + (i + 1) + " - Date-Time: " + actualFormattedDate + ", Amount: " + actualAmount + ", Transaction Type: " + actualTransactionType);
 

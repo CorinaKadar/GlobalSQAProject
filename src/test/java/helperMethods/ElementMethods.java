@@ -2,6 +2,7 @@ package helperMethods;
 
 import loggerUtility.LoggerUtility;
 import lombok.AllArgsConstructor;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,10 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @AllArgsConstructor
 public class ElementMethods {
@@ -35,6 +33,13 @@ public class ElementMethods {
     public void waitForTableValuesToBeVisible (List<WebElement> element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOfAllElements(element));
+    }
+
+    // For dinamic content loading (Ajax or Javascript)
+    public void waitForAjaxToComplete() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(driver -> js.executeScript("return jQuery.active == 0").equals(true));
     }
 
     public WebElement waitForCookieToBeVisible(WebElement element) {

@@ -28,6 +28,18 @@ public class BankManagerCustomersListPage extends BasePage {
     @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr")
     private List<WebElement> customersTableRowValues;
 
+    @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr/td[1]")
+    private List<WebElement> columnFirstNameValues;
+
+    @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr/td[2]")
+    private List<WebElement> columnLastNameValues;
+
+    @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr/td[3]")
+    private List<WebElement> columnPostCodeValues;
+
+    @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr/td[4]")
+    private List<WebElement> columnAccountNumberValues;
+
     public void searchCustomerByAccountNumber(String resultedAccountNumber) {
         LoggerUtility.info("Starting the process to search for a customer by account number.");
         try {
@@ -71,12 +83,11 @@ public class BankManagerCustomersListPage extends BasePage {
     public void validateCustomerTableRow(BankManagerObject expectedValues) {
         LoggerUtility.info("Starting the validation process for the Customers table rows.");
         try {
-            for (WebElement row : customersTableRowValues) {
-                List<WebElement> cells = row.findElements(By.tagName("td"));
-                String actualFirstName = cells.get(0).getText().trim();
-                String actualLastName = cells.get(1).getText().trim();
-                String actualPostCode = cells.get(2).getText().trim();
-                String actualAccountNumber = cells.get(3).getText().trim();
+            for (Integer i = 0; i < customersTableRowValues.size(); i++) {
+                String actualFirstName = columnFirstNameValues.get(i).getText().trim();
+                String actualLastName = columnLastNameValues.get(i).getText().trim();
+                String actualPostCode = columnPostCodeValues.get(i).getText().trim();
+                String actualAccountNumber = columnAccountNumberValues.get(i).getText().trim();
                 LoggerUtility.info("Successfully extracted the actual values - First Name: " + actualFirstName + " - Last Name: " + actualLastName + " - Post Code: " + actualPostCode + " - Account Number: " + actualAccountNumber);
                 LoggerUtility.info("Successfully extracted the expected values - First Name: " + expectedValues.getFirstName() + " - Last Name: " + expectedValues.getLastName() + " - Post Code: " + expectedValues.getPostCode() + " - Account Number: " + expectedValues.getAccountNumber());
 
