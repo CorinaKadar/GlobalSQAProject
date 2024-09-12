@@ -1,5 +1,6 @@
 package helperMethods;
 
+import loggerUtility.LoggerUtility;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;

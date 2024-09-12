@@ -72,6 +72,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
         String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+        LoggerUtility.info("Successfully extracted the xpath value.");
         transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
         try {
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
