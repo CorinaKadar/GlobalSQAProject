@@ -2,15 +2,14 @@ package helperMethods;
 
 import loggerUtility.LoggerUtility;
 import lombok.AllArgsConstructor;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -34,6 +33,20 @@ public class ElementMethods {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOfAllElements(element));
     }
+
+    public List<WebElement> refreshTransactionTableRowValues(String xpath) {
+        return driver.findElements(By.xpath(xpath));
+    }
+
+    public List<WebElement> getTransactionTableRowsUsingJS() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return (List<WebElement>) js.executeScript(
+                "return document.querySelectorAll('table.table.table-bordered.table-striped tbody tr');");
+    }
+
+
+
+
 
     // For dynamic content loading (Ajax or Javascript)
     public void waitForAjaxToComplete() {

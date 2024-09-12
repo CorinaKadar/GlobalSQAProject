@@ -46,7 +46,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
             LoggerUtility.info("The date: " + formattedCurrentDate + " is successfully inserted into the 'Start Date' field.");
             elementMethods.pressElement(startDateElement, Keys.ENTER);
             LoggerUtility.info("Successfully pressed 'Enter' to submit the date.");
-            elementMethods.waitForAjaxToComplete();
+            //elementMethods.waitForAjaxToComplete();
             LoggerUtility.info("Successfully filtered the transactions by the date: " + formattedCurrentDate);
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while filtering transactions by the date: " + formattedCurrentDate + ". Error: " + e.getMessage());
@@ -71,10 +71,9 @@ public class BankCustomerTransactionsListPage extends BasePage {
     // Method to validate each value from each table row.
     // This method takes a list of BankCustomerObject objects, which represent the expected values for each row in the Transactions table.
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
-        // The method loops through each row of the TransactionsTableRowValues, which is a list of WebElement objects representing the rows of the Transactions table on the webpage.
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
-        elementMethods.waitForAjaxToComplete();
-        transactionsTableRowValues = refreshTransactionTableRowValues();
+        //elementMethods.waitForAjaxToComplete();
+        transactionsTableRowValues = elementMethods.getTransactionTableRowsUsingJS();
         try {
             LoggerUtility.info("size-ul listei:" + transactionsTableRowValues.size());
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
@@ -101,9 +100,5 @@ public class BankCustomerTransactionsListPage extends BasePage {
             LoggerUtility.error("An error occurred during the validation of the Transactions table rows: " + e.getMessage());
             throw e;
         }
-    }
-
-    private List<WebElement> refreshTransactionTableRowValues() {
-        return driver.findElements(By.xpath("//table[@class='table table-bordered table-striped']//tbody/tr"));
     }
 }
