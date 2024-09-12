@@ -35,7 +35,7 @@ public class ElementMethods {
         wait.until(ExpectedConditions.visibilityOfAllElements(element));
     }
 
-    // For dinamic content loading (Ajax or Javascript)
+    // For dynamic content loading (Ajax or Javascript)
     public void waitForAjaxToComplete() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));

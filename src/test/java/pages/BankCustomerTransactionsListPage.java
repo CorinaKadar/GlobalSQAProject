@@ -74,6 +74,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
         // The method loops through each row of the TransactionsTableRowValues, which is a list of WebElement objects representing the rows of the Transactions table on the webpage.
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
         elementMethods.waitForAjaxToComplete();
+        transactionsTableRowValues = refreshTransactionTableRowValues();
         try {
             LoggerUtility.info("size-ul listei:" + transactionsTableRowValues.size());
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
@@ -100,5 +101,9 @@ public class BankCustomerTransactionsListPage extends BasePage {
             LoggerUtility.error("An error occurred during the validation of the Transactions table rows: " + e.getMessage());
             throw e;
         }
+    }
+
+    private List<WebElement> refreshTransactionTableRowValues() {
+        return driver.findElements(By.xpath("//table[@class='table table-bordered table-striped']//tbody/tr"));
     }
 }
