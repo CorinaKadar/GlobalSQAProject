@@ -74,7 +74,6 @@ public class BankCustomerTransactionsListPage extends BasePage {
         String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
         LoggerUtility.info("Successfully extracted the xpath value.");
         transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
-
         try {
             LoggerUtility.info("After refreshing the transactionTableRowValues the size is: " + transactionsTableRowValues.size());
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
