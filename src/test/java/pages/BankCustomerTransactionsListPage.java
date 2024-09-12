@@ -74,7 +74,9 @@ public class BankCustomerTransactionsListPage extends BasePage {
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
         //elementMethods.waitForAjaxToComplete();
         String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+        LoggerUtility.info("***************************** value for path: " + extractedXPath);
         transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
+        LoggerUtility.info("***************************** value for transaction: " + transactionsTableRowValues);
         try {
             LoggerUtility.info("size-ul listei:" + transactionsTableRowValues.size());
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {

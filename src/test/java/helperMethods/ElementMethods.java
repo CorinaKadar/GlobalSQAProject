@@ -35,6 +35,7 @@ public class ElementMethods {
     }
 
     public List<WebElement> refreshTransactionTableRowValues(String xpath) {
+        LoggerUtility.info("***************************** value for path: " + xpath);
         return driver.findElements(By.xpath(xpath));
     }
 
