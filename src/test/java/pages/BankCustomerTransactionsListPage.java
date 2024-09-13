@@ -49,6 +49,11 @@ public class BankCustomerTransactionsListPage extends BasePage {
             elementMethods.pressElement(startDateElement, Keys.ENTER);
             LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
             LoggerUtility.info("Successfully filtered the transactions by the date and time: " + formattedCurrentDateForFilter);
+
+            String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+            elementMethods.waitForPresenceOfAllElementsLocatedBy(extractedXPath);
+            //transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
+            LoggerUtility.info("Number of rows retrieved: " + transactionsTableRowValues.size());
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while filtering transactions by the date and time: " + formattedCurrentDateForFilter + ". Error: " + e.getMessage());
             throw e;
@@ -73,12 +78,12 @@ public class BankCustomerTransactionsListPage extends BasePage {
     // This method takes a list of BankCustomerObject objects, which represent the expected values for each row in the Transactions table.
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
-        String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
-        LoggerUtility.info("Successfully extracted the required xpath string value.");
+        //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+        //LoggerUtility.info("Successfully extracted the required xpath string value.");
         //elementMethods.waitForPresenceOfAllElementsLocatedBy(extractedXPath);
         //LoggerUtility.info("All items in the Transactions table are displayed.");
-        transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
-        LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
+        //transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
+        //LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
         try {
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
                 String actualDateTime = columnDateTimeValues.get(i).getText().trim();
