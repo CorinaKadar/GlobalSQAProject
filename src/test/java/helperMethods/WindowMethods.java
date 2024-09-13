@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class WindowMethods {
     public WebDriver driver;
 
-    public void refreshPage(){
+    public void refreshPage() {
         driver.navigate().refresh();
     }
 }

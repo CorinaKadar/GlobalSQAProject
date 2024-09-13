@@ -2,7 +2,6 @@ package sharedData;
 
 import loggerUtility.LoggerUtility;
 import lombok.Getter;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -25,9 +24,7 @@ public class SharedData {
         driver = new EdgeDriver(options);
         LoggerUtility.info("The browser is successfully opened.");
         driver.get("https://www.globalsqa.com/");
-        driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
-        //driver.manage().window().setSize(new Dimension(1920, 1080));  // Headless mode rendering fix
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         LoggerUtility.info("The page is successfully loaded.");
     }
