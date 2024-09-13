@@ -44,7 +44,8 @@ public class BankCustomerTransactionsListPage extends BasePage {
         elementMethods.waitForPageToLoad();
         LoggerUtility.info("Starting to filter the transactions by date and time: " + formattedCurrentDateForFilter);
         try {
-            elementMethods.waitForElementToBeClickable(startDateElement);
+            //elementMethods.waitForElementToBeClickable(startDateElement);
+            elementMethods.fluentWait(startDateElement);
             LoggerUtility.info("'Start Date' field is clickable.");
             elementMethods.clearField(startDateElement);
             LoggerUtility.info("'Start Date' field is clear.");
@@ -52,16 +53,12 @@ public class BankCustomerTransactionsListPage extends BasePage {
             LoggerUtility.info("The start date: " + formattedCurrentDateForFilter + " is successfully inserted into the 'Start Date' field.");
             elementMethods.pressElement(startDateElement, Keys.ENTER);
             LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
-
             elementMethods.waitForPageToLoad();
-
-
             //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTable");
             //elementMethods.waitForVisibilityOfAllElementsLocatedBy(extractedXPath);
             LoggerUtility.info("The Transactions tables is fully loaded");
             LoggerUtility.info("Successfully filtered the transactions by the Start Date field: " + formattedCurrentDateForFilter);
-
-            LoggerUtility.info("Number of rows retrieved: " + transactionsTableRowValues.size());
+            //LoggerUtility.info("Number of rows retrieved: " + transactionsTableRowValues.size());
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while filtering transactions by the date and time: " + formattedCurrentDateForFilter + ". Error: " + e.getMessage());
             throw e;
@@ -86,7 +83,8 @@ public class BankCustomerTransactionsListPage extends BasePage {
     // This method takes a list of BankCustomerObject objects, which represent the expected values for each row in the Transactions table.
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
         elementMethods.waitForPageToLoad();
-        elementMethods.waitForElementToBeVisible(transactionsTable);
+        elementMethods.fluentWait(transactionsTable);
+        //elementMethods.waitForElementToBeVisible(transactionsTable);
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
         //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
         //LoggerUtility.info("Successfully extracted the required xpath string value.");
