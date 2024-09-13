@@ -71,7 +71,12 @@ public class BankCustomerTransactionsListPage extends BasePage {
             //elementMethods.pressElement(startDateElement, Keys.ENTER);
             //LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
 
-            elementMethods.waitForPageToLoad();
+            elementMethods.retryElementInteraction(() -> {
+                elementMethods.waitForPageToLoad();
+                elementMethods.fluentWaitList(transactionsTableRowValues);
+            });
+
+            //elementMethods.waitForPageToLoad();
             //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTable");
             //elementMethods.waitForVisibilityOfAllElementsLocatedBy(extractedXPath);
             LoggerUtility.info("The Transactions tables is fully loaded");

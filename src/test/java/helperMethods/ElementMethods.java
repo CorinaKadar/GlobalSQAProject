@@ -44,6 +44,14 @@ public class ElementMethods {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    public void fluentWaitList(List<WebElement> element) {
+        FluentWait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
+        wait.until(ExpectedConditions.visibilityOfAllElements(element));
+    }
+
     public void waitForPageToLoad() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         // Wait for JavaScript to finish
