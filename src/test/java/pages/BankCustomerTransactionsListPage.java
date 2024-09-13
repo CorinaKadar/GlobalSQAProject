@@ -51,10 +51,14 @@ public class BankCustomerTransactionsListPage extends BasePage {
             LoggerUtility.info("The start date: " + formattedCurrentDateForFilter + " is successfully inserted into the 'Start Date' field.");
             elementMethods.pressElement(startDateElement, Keys.ENTER);
             LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
-            LoggerUtility.info("Successfully filtered the transactions by the date and time: " + formattedCurrentDateForFilter);
 
-            String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTable");
-            elementMethods.waitForPresenceOfAllElementsLocatedBy(extractedXPath);
+            elementMethods.fluentWait(transactionsTable);
+
+
+            //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTable");
+            //elementMethods.waitForVisibilityOfAllElementsLocatedBy(extractedXPath);
+            LoggerUtility.info("The Transactions tables is fully loaded");
+            LoggerUtility.info("Successfully filtered the transactions by the Start Date field: " + formattedCurrentDateForFilter);
 
             LoggerUtility.info("Number of rows retrieved: " + transactionsTableRowValues.size());
         } catch (Exception e) {

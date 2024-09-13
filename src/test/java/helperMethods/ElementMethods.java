@@ -3,9 +3,11 @@ package helperMethods;
 import loggerUtility.LoggerUtility;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -29,10 +31,19 @@ public class ElementMethods {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitForPresenceOfAllElementsLocatedBy(String xpath) {
+    public void waitForVisibilityOfAllElementsLocatedBy(String xpath) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
     }
+
+    public void fluentWait(WebElement element) {
+        FluentWait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
 
     // retrieve and return a list of web elements (specifically rows or values in a table) from the webpage, based on an XPath provided as an argument
     public List<WebElement> refreshTransactionTableRowValues(String xpath) {
