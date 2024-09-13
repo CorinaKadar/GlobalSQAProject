@@ -60,10 +60,10 @@ public class BankCustomerTransactionsListPage extends BasePage {
         try {
         elementMethods.waitForPageToLoad();
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
-        //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
-        //LoggerUtility.info("Successfully extracted the required xpath string value.");
-        //transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
-        //LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
+        String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+        LoggerUtility.info("Successfully extracted the required xpath string value.");
+        transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
+        LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
                 String actualDateTime = columnDateTimeValues.get(i).getText().trim();
                 String actualAmount = columnAmountValues.get(i).getText().trim();
