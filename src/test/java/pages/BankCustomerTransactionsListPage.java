@@ -47,7 +47,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
             elementMethods.pressElement(startDateElement, Keys.ENTER);
             LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
             elementMethods.waitForPageToLoad();
-            LoggerUtility.info("The Transactions tables is fully loaded");
+            LoggerUtility.info("The Transactions tables is fully loaded.");
             LoggerUtility.info("Successfully filtered the transactions by the Start Date field: " + formattedCurrentDateForFilter);
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while filtering transactions by the date and time: " + formattedCurrentDateForFilter + ". Error: " + e.getMessage());
@@ -59,10 +59,10 @@ public class BankCustomerTransactionsListPage extends BasePage {
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
         try {
             elementMethods.waitForPageToLoad();
-            //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
-            //LoggerUtility.info("Successfully extracted the required xpath string value.");
-            //transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
-            //LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
+            String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+            LoggerUtility.info("Successfully extracted the required xpath string value.");
+            transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
+            LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
                 String actualDateTime = columnDateTimeValues.get(i).getText().trim();
                 String actualAmount = columnAmountValues.get(i).getText().trim();
