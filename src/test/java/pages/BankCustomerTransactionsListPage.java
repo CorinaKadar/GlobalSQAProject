@@ -27,6 +27,9 @@ public class BankCustomerTransactionsListPage extends BasePage {
     @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr")
     private List<WebElement> transactionsTableRowValues;
 
+    @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody")
+    private WebElement transactionsTable;
+
     @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr/td[1]")
     private List<WebElement> columnDateTimeValues;
 
@@ -50,9 +53,9 @@ public class BankCustomerTransactionsListPage extends BasePage {
             LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
             LoggerUtility.info("Successfully filtered the transactions by the date and time: " + formattedCurrentDateForFilter);
 
-            String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+            String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTable");
             elementMethods.waitForPresenceOfAllElementsLocatedBy(extractedXPath);
-            //transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
+
             LoggerUtility.info("Number of rows retrieved: " + transactionsTableRowValues.size());
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while filtering transactions by the date and time: " + formattedCurrentDateForFilter + ". Error: " + e.getMessage());
