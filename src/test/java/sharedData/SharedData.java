@@ -3,8 +3,8 @@ package sharedData;
 import loggerUtility.LoggerUtility;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,9 +17,10 @@ public class SharedData {
 
     @BeforeMethod
     public void prepareEnv() {
-        EdgeOptions options = new EdgeOptions();
+        ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless=new");
-        driver = new EdgeDriver(options);
+        options.addArguments("--disable-search-engine-choice-screen");
+        driver = new ChromeDriver(options);
         LoggerUtility.info("The browser is successfully opened.");
         driver.get("https://www.globalsqa.com/");
         driver.manage().window().maximize();
