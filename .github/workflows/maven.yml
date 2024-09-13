@@ -16,6 +16,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-        
+
+    - name: Upload screenshots
+      uses: actions/upload-artifact@v2
+      with:
+        name: selenium-screenshots
+        path: ./screenshots/
+
     - name: Run Automation Tests
       run: mvn clean install

@@ -11,10 +11,14 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import org.apache.commons.io.FileUtils;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @AllArgsConstructor
@@ -228,5 +232,18 @@ public class ElementMethods {
     public void jsClick(WebElement element) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].click();", element);
+    }
+
+    public void takeScreenshot(String fileName) {
+        // Take screenshot and store it as a file
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        try {
+            // Save the screenshot to the specified path
+            FileUtils.copyFile(screenshot, new File("./screenshots/" + fileName + sdf.format(new Date()) + ".png"));
+            LoggerUtility.info("Screenshot saved as: " + fileName + sdf.format(new Date()) + ".png");
+        } catch (IOException e) {
+            LoggerUtility.error("Failed to save screenshot: " + e.getMessage());
+        }
     }
 }
