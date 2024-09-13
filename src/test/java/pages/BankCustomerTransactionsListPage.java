@@ -41,6 +41,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
 
 
     public void filterTransactionsByStartDateField(String formattedCurrentDateForFilter) {
+        elementMethods.waitForPageToLoad();
         LoggerUtility.info("Starting to filter the transactions by date and time: " + formattedCurrentDateForFilter);
         try {
             elementMethods.waitForElementToBeClickable(startDateElement);
@@ -84,6 +85,8 @@ public class BankCustomerTransactionsListPage extends BasePage {
     // Method to validate each value from each table row.
     // This method takes a list of BankCustomerObject objects, which represent the expected values for each row in the Transactions table.
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
+        elementMethods.waitForPageToLoad();
+        elementMethods.waitForElementToBeVisible(transactionsTable);
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
         //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
         //LoggerUtility.info("Successfully extracted the required xpath string value.");
