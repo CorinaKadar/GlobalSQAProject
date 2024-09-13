@@ -240,7 +240,7 @@ public class ElementMethods {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
         try {
             // Save the screenshot to the specified path
-            FileUtils.copyFile(screenshot, new File("./screenshots/" + fileName + sdf.format(new Date()) + ".png"));
+            FileUtils.copyFile(screenshot, new File(fileName + sdf.format(new Date()) + ".png"));
             LoggerUtility.info("Screenshot saved as: " + fileName + sdf.format(new Date()) + ".png");
         } catch (IOException e) {
             LoggerUtility.error("Failed to save screenshot: " + e.getMessage());
