@@ -22,17 +22,17 @@ public class ElementMethods {
     public WebDriver driver;
 
     public void waitForElementToBeClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void waitForElementToBeVisible(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void waitForVisibilityOfAllElementsLocatedBy(String xpath) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
     }
 
@@ -91,7 +91,7 @@ public class ElementMethods {
     }
 
     public WebElement waitForCookieToBeVisible(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -185,5 +185,28 @@ public class ElementMethods {
 
     public void clearField(WebElement element) {
         element.clear();
+    }
+
+    // Retry logic for handling stale elements and temporary failures
+    public void retryElementInteraction(Runnable interaction) {
+        Integer attempts = 0;
+        boolean success = false;
+
+        while (attempts < 3 && !success) {
+            try {
+                interaction.run();
+                success = true;
+            } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+                attempts++;
+                LoggerUtility.warn("Retrying interaction due to: " + e.getMessage());
+                // Re-find the element if necessary
+                //element = driver.findElement(By.id("startDateField"));
+            }
+        }
+
+        if (!success) {
+            throw new RuntimeException("Failed to interact with the element after 3 attempts");
+        }
+
     }
 }

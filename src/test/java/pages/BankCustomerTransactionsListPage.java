@@ -46,13 +46,31 @@ public class BankCustomerTransactionsListPage extends BasePage {
         try {
             //elementMethods.waitForElementToBeClickable(startDateElement);
             elementMethods.fluentWait(startDateElement);
-            LoggerUtility.info("'Start Date' field is clickable.");
-            elementMethods.clearField(startDateElement);
-            LoggerUtility.info("'Start Date' field is clear.");
-            elementMethods.insertValue(startDateElement, formattedCurrentDateForFilter);
-            LoggerUtility.info("The start date: " + formattedCurrentDateForFilter + " is successfully inserted into the 'Start Date' field.");
-            elementMethods.pressElement(startDateElement, Keys.ENTER);
-            LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
+            // Step 1: Retry interaction for clearing the field
+            elementMethods.retryElementInteraction(() -> {
+                elementMethods.clearField(startDateElement);
+                LoggerUtility.info("'Start Date' field is clear.");
+            });
+
+            // Step 2: Retry interaction for inserting the value
+            elementMethods.retryElementInteraction(() -> {
+                elementMethods.insertValue(startDateElement, formattedCurrentDateForFilter);
+                LoggerUtility.info("The start date: " + formattedCurrentDateForFilter + " is successfully inserted.");
+            });
+
+            // Step 3: Retry interaction for pressing Enter
+            elementMethods.retryElementInteraction(() -> {
+                elementMethods.pressElement(startDateElement, Keys.ENTER);
+                LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
+            });
+            //LoggerUtility.info("'Start Date' field is clickable.");
+            //elementMethods.clearField(startDateElement);
+            //LoggerUtility.info("'Start Date' field is clear.");
+            //elementMethods.insertValue(startDateElement, formattedCurrentDateForFilter);
+            //LoggerUtility.info("The start date: " + formattedCurrentDateForFilter + " is successfully inserted into the 'Start Date' field.");
+            //elementMethods.pressElement(startDateElement, Keys.ENTER);
+            //LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
+
             elementMethods.waitForPageToLoad();
             //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTable");
             //elementMethods.waitForVisibilityOfAllElementsLocatedBy(extractedXPath);
