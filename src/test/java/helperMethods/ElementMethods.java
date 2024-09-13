@@ -105,6 +105,17 @@ public class ElementMethods {
         return dateFormat.format(currentDate);
     }
 
+    public String getCurrentDateForFilter() {
+        // Define the desired output format
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+
+        // Create a Date object (for demonstration purposes, using the current date and time)
+        Date now = new Date();
+
+        // Format the date to the desired format
+        return outputFormat.format(now); // formattedDate "13/09/2024 11:10 AM"
+    }
+
     public void pressElement(WebElement element, Keys key) {
         waitForElementToBeVisible(element);
         element.sendKeys(key);
@@ -151,5 +162,9 @@ public class ElementMethods {
             throw new RuntimeException(e);
         }
         return dateFormat.format(date);
+    }
+
+    public void clearField(WebElement element) {
+        element.clear();
     }
 }

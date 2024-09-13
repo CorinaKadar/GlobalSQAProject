@@ -37,18 +37,20 @@ public class BankCustomerTransactionsListPage extends BasePage {
     private List<WebElement> columnTransactionTypeValues;
 
 
-    public void filterTransactionsByDate(String formattedCurrentDate) {
-        LoggerUtility.info("Starting to filter the transactions by date: " + formattedCurrentDate);
+    public void filterTransactionsByStartDateField(String formattedCurrentDateForFilter) {
+        LoggerUtility.info("Starting to filter the transactions by date and time: " + formattedCurrentDateForFilter);
         try {
             elementMethods.waitForElementToBeClickable(startDateElement);
             LoggerUtility.info("'Start Date' field is clickable.");
-            elementMethods.insertValue(startDateElement, formattedCurrentDate);
-            LoggerUtility.info("The date: " + formattedCurrentDate + " is successfully inserted into the 'Start Date' field.");
+            elementMethods.clearField(startDateElement);
+            LoggerUtility.info("'Start Date' field is clear.");
+            elementMethods.insertValue(startDateElement, formattedCurrentDateForFilter);
+            LoggerUtility.info("The date and time: " + formattedCurrentDateForFilter + " are successfully inserted into the 'Start Date' field.");
             elementMethods.pressElement(startDateElement, Keys.ENTER);
-            LoggerUtility.info("Successfully pressed 'Enter' to submit the date.");
-            LoggerUtility.info("Successfully filtered the transactions by the date: " + formattedCurrentDate);
+            LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
+            LoggerUtility.info("Successfully filtered the transactions by the date and time: " + formattedCurrentDateForFilter);
         } catch (Exception e) {
-            LoggerUtility.error("An error occurred while filtering transactions by the date: " + formattedCurrentDate + ". Error: " + e.getMessage());
+            LoggerUtility.error("An error occurred while filtering transactions by the date and time: " + formattedCurrentDateForFilter + ". Error: " + e.getMessage());
             throw e;
         }
     }
@@ -71,10 +73,10 @@ public class BankCustomerTransactionsListPage extends BasePage {
     // This method takes a list of BankCustomerObject objects, which represent the expected values for each row in the Transactions table.
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
-        String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
-        LoggerUtility.info("Successfully extracted the required xpath string value.");
-        elementMethods.waitForPresenceOfAllElementsLocatedBy(extractedXPath);
-        LoggerUtility.info("All items in the Transactions table are displayed.");
+        //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+        //LoggerUtility.info("Successfully extracted the required xpath string value.");
+        //elementMethods.waitForPresenceOfAllElementsLocatedBy(extractedXPath);
+        //LoggerUtility.info("All items in the Transactions table are displayed.");
         try {
             //transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
             //LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());

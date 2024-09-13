@@ -32,6 +32,7 @@ public class BankCustomerTest extends SharedData {
 
         // Getting the current date
         String formattedCurrentDate = elementMethods.getCurrentDate();
+        String formattedCurrentDateForFilter = elementMethods.getCurrentDateForFilter();
 
         // Scenario 2 -- Deposit
         bankCustomerHomePage.depositAmount(testData.getDepositedAmount());
@@ -46,7 +47,7 @@ public class BankCustomerTest extends SharedData {
         // Scenario 4 -- Transactions
         bankCustomerHomePage.interactWithTheTransactionsTab();
         BankCustomerTransactionsListPage bankCustomerTransactionsListPage = new BankCustomerTransactionsListPage(getDriver());
-        bankCustomerTransactionsListPage.filterTransactionsByDate(formattedCurrentDate);
+        bankCustomerTransactionsListPage.filterTransactionsByStartDateField(formattedCurrentDateForFilter);
         List<BankCustomerObject> expectedRows = Arrays.asList(
                 new BankCustomerObject(formattedCurrentDate, testData.getDepositedAmount(), "Credit"),
                 new BankCustomerObject(formattedCurrentDate, testData.getWithdrawnAmount(), "Debit"));
