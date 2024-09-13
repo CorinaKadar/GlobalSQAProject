@@ -73,10 +73,10 @@ public class BankCustomerTransactionsListPage extends BasePage {
     // This method takes a list of BankCustomerObject objects, which represent the expected values for each row in the Transactions table.
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
-        //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
-        //LoggerUtility.info("Successfully extracted the required xpath string value.");
-        //elementMethods.waitForPresenceOfAllElementsLocatedBy(extractedXPath);
-        //LoggerUtility.info("All items in the Transactions table are displayed.");
+        String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+        LoggerUtility.info("Successfully extracted the required xpath string value.");
+        elementMethods.waitForPresenceOfAllElementsLocatedBy(extractedXPath);
+        LoggerUtility.info("All items in the Transactions table are displayed.");
         try {
             //transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
             //LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
