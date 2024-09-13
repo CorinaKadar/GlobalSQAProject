@@ -29,6 +29,11 @@ public class ElementMethods {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void waitForVisibilityOfAllElementsLocatedBy(String xpath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
+    }
+
     // retrieve and return a list of web elements (specifically rows or values in a table) from the webpage, based on an XPath provided as an argument
     public List<WebElement> refreshTransactionTableRowValues(String xpath) {
         return driver.findElements(By.xpath(xpath));
