@@ -29,6 +29,7 @@ public class ElementMethods {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    // retrieve and return a list of web elements (specifically rows or values in a table) from the webpage, based on an XPath provided as an argument
     public List<WebElement> refreshTransactionTableRowValues(String xpath) {
         return driver.findElements(By.xpath(xpath));
     }
