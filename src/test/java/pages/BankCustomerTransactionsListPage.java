@@ -2,7 +2,6 @@ package pages;
 
 import loggerUtility.LoggerUtility;
 import objectData.BankCustomerObject;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +33,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
     @FindBy(xpath = "//table[@class='table table-bordered table-striped']//tbody/tr/td[3]")
     private List<WebElement> columnTransactionTypeValues;
 
-    public void filterTransactionsByStartDateField(String formattedCurrentDateForFilter) {
+    /*public void filterTransactionsByStartDateField(String formattedCurrentDateForFilter) {
         elementMethods.waitForPageToLoad();
         LoggerUtility.info("Starting to filter the transactions by date and time: " + formattedCurrentDateForFilter);
         try {
@@ -53,16 +52,17 @@ public class BankCustomerTransactionsListPage extends BasePage {
             LoggerUtility.error("An error occurred while filtering transactions by the date and time: " + formattedCurrentDateForFilter + ". Error: " + e.getMessage());
             throw e;
         }
-    }
+    }*/
 
     // Method to validate each value from each table row.
     // This method takes a list of BankCustomerObject objects, which represent the expected values for each row in the Transactions table.
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
+        elementMethods.waitForPageToLoad();
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
-        String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
-        LoggerUtility.info("Successfully extracted the required xpath string value.");
-        transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
-        LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
+        //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+        //LoggerUtility.info("Successfully extracted the required xpath string value.");
+        //transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
+        //LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
         try {
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
                 String actualDateTime = columnDateTimeValues.get(i).getText().trim();
