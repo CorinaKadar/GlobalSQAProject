@@ -47,7 +47,7 @@ public class BankCustomerTest extends SharedData {
         // Scenario 4 -- Transactions
         bankCustomerHomePage.interactWithTheTransactionsTab();
         BankCustomerTransactionsListPage bankCustomerTransactionsListPage = new BankCustomerTransactionsListPage(getDriver());
-        //bankCustomerTransactionsListPage.filterTransactionsByStartDateField(formattedCurrentDateForFilter);
+        bankCustomerTransactionsListPage.filterTransactionsByStartDateField(formattedCurrentDateForFilter);
         List<BankCustomerObject> expectedRows = Arrays.asList(
                 new BankCustomerObject(formattedCurrentDate, testData.getDepositedAmount(), "Credit"),
                 new BankCustomerObject(formattedCurrentDate, testData.getWithdrawnAmount(), "Debit"));

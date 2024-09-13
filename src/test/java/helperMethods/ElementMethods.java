@@ -23,12 +23,12 @@ public class ElementMethods {
     public WebDriver driver;
 
     public void waitForElementToBeClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void waitForElementToBeVisible(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -111,16 +111,13 @@ public class ElementMethods {
     public String getCurrentDate() {
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        return dateFormat.format(currentDate);
+        return dateFormat.format(currentDate); // formattedDate "09/13/2024"
     }
 
     public String getCurrentDateForFilter() {
-        // Define the desired output format
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
-        // Create a Date object (for demonstration purposes, using the current date and time)
+        SimpleDateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
         Date now = new Date();
-        // Format the date to the desired format
-        return outputFormat.format(now); // formattedDate "13/09/2024 11:10 AM"
+        return outputFormat.format(now); // formattedDate "09/13/2024 11:10 AM"
     }
 
     // Generalized method to get the value of the @FindBy annotation
@@ -152,18 +149,18 @@ public class ElementMethods {
         }
     }
 
+    // retrieve and return a list of web elements from the webpage, based on an XPath provided as an argument
+    public List<WebElement> refreshTransactionTableRowValues(String xpath) {
+        return driver.findElements(By.xpath(xpath));
+    }
+
     public void waitForPageToLoad() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Extended wait
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         // Wait for the page to be fully loaded
         wait.until(driver -> jsExecutor.executeScript("return document.readyState").equals("complete"));
         // Wait for any active jQuery requests to complete (if applicable)
         wait.until(driver -> (Boolean) jsExecutor.executeScript("return (typeof jQuery === 'undefined' || jQuery.active === 0)"));
-    }
-
-    // retrieve and return a list of web elements (specifically rows or values in a table) from the webpage, based on an XPath provided as an argument
-    public List<WebElement> refreshTransactionTableRowValues(String xpath) {
-        return driver.findElements(By.xpath(xpath));
     }
 
     public void fluentWaitForElementToBeClickable(WebElement element) {

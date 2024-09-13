@@ -2,7 +2,6 @@ package pages;
 
 import loggerUtility.LoggerUtility;
 import objectData.BankManagerObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -79,7 +78,6 @@ public class BankManagerCustomersListPage extends BasePage {
         }
     }
 
-    // The method iterates through each row of a table displayed on a web page, extracts the data from each cell in the row, and compares it with the expected values stored in an instance of CustomersTableModel.
     public void validateCustomerTableRow(BankManagerObject expectedValues) {
         LoggerUtility.info("Starting the validation process for the Customers table rows.");
         try {
@@ -96,8 +94,8 @@ public class BankManagerCustomersListPage extends BasePage {
                 Assert.assertEquals(expectedValues.getPostCode(), actualPostCode);
                 Assert.assertEquals(expectedValues.getAccountNumber(), actualAccountNumber);
                 LoggerUtility.info("Customers table values are successfully validated.");
-                LoggerUtility.info("The validation process for the Customers table rows is completed.");
             }
+            LoggerUtility.info("The validation process for the Customers table rows is completed.");
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while validating the Customers table row: " + e.getMessage());
             throw e;
