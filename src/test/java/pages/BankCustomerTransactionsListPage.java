@@ -52,7 +52,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
             elementMethods.pressElement(startDateElement, Keys.ENTER);
             LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
 
-            elementMethods.fluentWait(transactionsTable);
+            elementMethods.waitForPageToLoad();
 
 
             //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTable");

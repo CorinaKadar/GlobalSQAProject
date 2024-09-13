@@ -44,6 +44,14 @@ public class ElementMethods {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    public void waitForPageToLoad() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        // Wait for JavaScript to finish
+        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        // Wait for jQuery to finish (if applicable)
+        wait.until(driver -> (Boolean) ((JavascriptExecutor) driver).executeScript("return jQuery.active == 0"));
+    }
+
 
     // retrieve and return a list of web elements (specifically rows or values in a table) from the webpage, based on an XPath provided as an argument
     public List<WebElement> refreshTransactionTableRowValues(String xpath) {
