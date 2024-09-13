@@ -41,44 +41,22 @@ public class BankCustomerTransactionsListPage extends BasePage {
 
 
     public void filterTransactionsByStartDateField(String formattedCurrentDateForFilter) {
+        elementMethods.clearAllCookies();
         elementMethods.waitForPageToLoad();
         LoggerUtility.info("Starting to filter the transactions by date and time: " + formattedCurrentDateForFilter);
         try {
-            //elementMethods.waitForElementToBeClickable(startDateElement);
-            elementMethods.fluentWait(startDateElement);
-            // Step 1: Retry interaction for clearing the field
-            elementMethods.retryElementInteraction(() -> {
-                elementMethods.clearField(startDateElement);
-                LoggerUtility.info("'Start Date' field is clear.");
-            });
+            elementMethods.waitForElementToBeClickable(startDateElement);
+            LoggerUtility.info("'Start Date' field is clickable.");
+            elementMethods.clearField(startDateElement);
+            LoggerUtility.info("'Start Date' field is clear.");
+            elementMethods.insertValue(startDateElement, formattedCurrentDateForFilter);
+            LoggerUtility.info("The start date: " + formattedCurrentDateForFilter + " is successfully inserted into the 'Start Date' field.");
+            elementMethods.pressElement(startDateElement, Keys.ENTER);
+            LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
+            elementMethods.waitForPageToLoad();
 
-            // Step 2: Retry interaction for inserting the value
-            elementMethods.retryElementInteraction(() -> {
-                elementMethods.insertValue(startDateElement, formattedCurrentDateForFilter);
-                LoggerUtility.info("The start date: " + formattedCurrentDateForFilter + " is successfully inserted.");
-            });
-
-            // Step 3: Retry interaction for pressing Enter
-            elementMethods.retryElementInteraction(() -> {
-                elementMethods.pressElement(startDateElement, Keys.ENTER);
-                LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
-            });
-            //LoggerUtility.info("'Start Date' field is clickable.");
-            //elementMethods.clearField(startDateElement);
-            //LoggerUtility.info("'Start Date' field is clear.");
-            //elementMethods.insertValue(startDateElement, formattedCurrentDateForFilter);
-            //LoggerUtility.info("The start date: " + formattedCurrentDateForFilter + " is successfully inserted into the 'Start Date' field.");
-            //elementMethods.pressElement(startDateElement, Keys.ENTER);
-            //LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
-
-            elementMethods.retryElementInteraction(() -> {
-                elementMethods.waitForPageToLoad();
-                elementMethods.fluentWaitList(transactionsTableRowValues);
-            });
-
-            //elementMethods.waitForPageToLoad();
-            //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTable");
-            //elementMethods.waitForVisibilityOfAllElementsLocatedBy(extractedXPath);
+            String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTable");
+            elementMethods.waitForVisibilityOfAllElementsLocatedBy(extractedXPath);
             LoggerUtility.info("The Transactions tables is fully loaded");
             LoggerUtility.info("Successfully filtered the transactions by the Start Date field: " + formattedCurrentDateForFilter);
             LoggerUtility.info("Number of rows retrieved: " + transactionsTableRowValues.size());
@@ -106,15 +84,15 @@ public class BankCustomerTransactionsListPage extends BasePage {
     // This method takes a list of BankCustomerObject objects, which represent the expected values for each row in the Transactions table.
     public void validateTransactionTableRows(List<BankCustomerObject> expectedValues) {
         elementMethods.waitForPageToLoad();
-        elementMethods.fluentWait(transactionsTable);
+        //elementMethods.fluentWait(transactionsTable);
         //elementMethods.waitForElementToBeVisible(transactionsTable);
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
-        //String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+        String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
         //LoggerUtility.info("Successfully extracted the required xpath string value.");
-        //elementMethods.waitForPresenceOfAllElementsLocatedBy(extractedXPath);
+        //elementMethods.waitForVisibilityOfAllElementsLocatedBy(extractedXPath);
         //LoggerUtility.info("All items in the Transactions table are displayed.");
-        //transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
-        //LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
+        transactionsTableRowValues = elementMethods.refreshTransactionTableRowValues(extractedXPath);
+        LoggerUtility.info("Transaction table is refreshed. Number of rows retrieved: " + transactionsTableRowValues.size());
         try {
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
                 String actualDateTime = columnDateTimeValues.get(i).getText().trim();

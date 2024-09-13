@@ -21,11 +21,13 @@ public class SharedData {
         EdgeOptions options = new EdgeOptions();
         options.addArguments("--headless=new");
         //options.addArguments("--disable-search-engine-choice-screen");
+        options.addArguments("window-size=1920x1080");
         driver = new EdgeDriver(options);
         LoggerUtility.info("The browser is successfully opened.");
         driver.get("https://www.globalsqa.com/");
-        //driver.manage().window().maximize();
-        driver.manage().window().setSize(new Dimension(1920, 1080));  // Headless mode rendering fix
+        driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
+        //driver.manage().window().setSize(new Dimension(1920, 1080));  // Headless mode rendering fix
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         LoggerUtility.info("The page is successfully loaded.");
     }

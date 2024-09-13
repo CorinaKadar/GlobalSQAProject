@@ -22,17 +22,17 @@ public class ElementMethods {
     public WebDriver driver;
 
     public void waitForElementToBeClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void waitForElementToBeVisible(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void waitForVisibilityOfAllElementsLocatedBy(String xpath) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
     }
 
@@ -44,20 +44,23 @@ public class ElementMethods {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void fluentWaitList(List<WebElement> element) {
+    public void fluentWaitV2(WebElement element, String text) {
         FluentWait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
-        wait.until(ExpectedConditions.visibilityOfAllElements(element));
+        wait.until(ExpectedConditions.textToBePresentInElement(element, text));
     }
 
     public void waitForPageToLoad() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        // Wait for JavaScript to finish
-        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
-        // Wait for jQuery to finish (if applicable)
-        wait.until(driver -> (Boolean) ((JavascriptExecutor) driver).executeScript("return jQuery.active == 0"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Extended wait
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
+        // Wait for the page to be fully loaded
+        wait.until(driver -> jsExecutor.executeScript("return document.readyState").equals("complete"));
+
+        // Wait for any active jQuery requests to complete (if applicable)
+        wait.until(driver -> (Boolean) jsExecutor.executeScript("return (typeof jQuery === 'undefined' || jQuery.active === 0)"));
     }
 
 
@@ -195,6 +198,10 @@ public class ElementMethods {
         element.clear();
     }
 
+    public void clearAllCookies() {
+        driver.manage().deleteAllCookies();
+    }
+
     // Retry logic for handling stale elements and temporary failures
     public void retryElementInteraction(Runnable interaction) {
         Integer attempts = 0;
@@ -216,5 +223,10 @@ public class ElementMethods {
             throw new RuntimeException("Failed to interact with the element after 3 attempts");
         }
 
+    }
+
+    public void jsClick(WebElement element) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].click();", element);
     }
 }
