@@ -58,7 +58,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
             //elementMethods.waitForVisibilityOfAllElementsLocatedBy(extractedXPath);
             LoggerUtility.info("The Transactions tables is fully loaded");
             LoggerUtility.info("Successfully filtered the transactions by the Start Date field: " + formattedCurrentDateForFilter);
-            //LoggerUtility.info("Number of rows retrieved: " + transactionsTableRowValues.size());
+            LoggerUtility.info("Number of rows retrieved: " + transactionsTableRowValues.size());
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while filtering transactions by the date and time: " + formattedCurrentDateForFilter + ". Error: " + e.getMessage());
             throw e;
