@@ -150,8 +150,13 @@ public class ElementMethods {
     }
 
     // Return a list of web elements from the webpage, based on the XPath provided as an argument
-    public List<WebElement> refreshTransactionTableRowValues(String xpath) {
+    public List<WebElement> refreshElements(String xpath) {
         return driver.findElements(By.xpath(xpath));
+    }
+
+    // Return a web element from the webpage, based on the XPath provided as an argument
+    public WebElement refreshElement(String xpath) {
+        return driver.findElement(By.xpath(xpath));
     }
 
     public void waitForPageToLoad() {

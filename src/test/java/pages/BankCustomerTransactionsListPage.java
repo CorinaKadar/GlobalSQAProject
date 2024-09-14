@@ -16,7 +16,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(id = "start")
+    @FindBy(xpath = "//input[@id='start']")
     private WebElement startDateElement;
 
     @FindBy(xpath = "//button[@class='btn logout' and contains(text(), 'Logout')]")
@@ -38,6 +38,11 @@ public class BankCustomerTransactionsListPage extends BasePage {
         LoggerUtility.info("Starting to filter the transactions by date and time: " + formattedCurrentDateForFilter);
         try {
             elementMethods.waitForPageToLoad();
+            LoggerUtility.info("Page load completed successfully.");
+            String extractedXPath = elementMethods.getFindByAnnotationValue(this, "startDateElement");
+            LoggerUtility.info("Successfully extracted the required xpath string value.");
+            startDateElement = elementMethods.refreshElement(extractedXPath);
+            LoggerUtility.info("Successfully identified the Start Date field.");
             elementMethods.fluentWaitForElementToBeClickable(startDateElement);
             LoggerUtility.info("'Start Date' field is clickable.");
             elementMethods.clearField(startDateElement);
@@ -47,7 +52,7 @@ public class BankCustomerTransactionsListPage extends BasePage {
             elementMethods.pressElement(startDateElement, Keys.ENTER);
             LoggerUtility.info("Successfully pressed 'Enter' to submit the start date value.");
             elementMethods.waitForPageToLoad();
-            LoggerUtility.info("The Transactions tables is fully loaded.");
+            LoggerUtility.info("Page load completed successfully.");
             LoggerUtility.info("Successfully filtered the transactions by the Start Date field: " + formattedCurrentDateForFilter);
         } catch (Exception e) {
             LoggerUtility.error("An error occurred while filtering transactions by the date and time: " + formattedCurrentDateForFilter + ". Error: " + e.getMessage());
@@ -59,6 +64,11 @@ public class BankCustomerTransactionsListPage extends BasePage {
         LoggerUtility.info("Starting the validation process for the Transactions table rows.");
         try {
             elementMethods.waitForPageToLoad();
+            LoggerUtility.info("Page load completed successfully.");
+            String extractedXPath = elementMethods.getFindByAnnotationValue(this, "transactionsTableRowValues");
+            LoggerUtility.info("Successfully extracted the required xpath string value.");
+            transactionsTableRowValues = elementMethods.refreshElements(extractedXPath);
+            LoggerUtility.info("Successfully identified the Transactions table rows.");
             for (Integer i = 0; i < transactionsTableRowValues.size(); i++) {
                 String actualDateTime = columnDateTimeValues.get(i).getText().trim();
                 String actualAmount = columnAmountValues.get(i).getText().trim();
