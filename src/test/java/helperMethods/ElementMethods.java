@@ -85,7 +85,7 @@ public class ElementMethods {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        return dateFormat.format(date);
+        return dateFormat.format(date); // String "MMM dd, yyyy"
     }
 
     // Method to avoid parsing, because Expected Data cannot be parsed due to the format used for filtering
@@ -93,7 +93,7 @@ public class ElementMethods {
     public String formatExpectedTransactionDate(String inputDate) {
         // Split the input date string into parts (month, day, year)
         String[] dateParts = inputDate.split("/");
-        // Extract the month, day, and year as integers
+        // Extract the month, day and year as integers
         Integer month = Integer.parseInt(dateParts[0]);
         Integer day = Integer.parseInt(dateParts[1]);
         Integer year = Integer.parseInt(dateParts[2]);
@@ -149,7 +149,7 @@ public class ElementMethods {
         }
     }
 
-    // retrieve and return a list of web elements from the webpage, based on an XPath provided as an argument
+    // Return a list of web elements from the webpage, based on the XPath provided as an argument
     public List<WebElement> refreshTransactionTableRowValues(String xpath) {
         return driver.findElements(By.xpath(xpath));
     }
